@@ -56,7 +56,7 @@ class RockPaperScissors:
             # Computer picks a choice at random.
             self.computer_choice = random.choice(RockPaperScissors.OPTION_LIST)
 
-            # Check whether the user made a valid choice or not.
+            # Ask user for a choice, and check if valid or not.
             self.get_valid_user_choice()
             print(f"I picked {self.computer_choice}")
             time.sleep(2)
