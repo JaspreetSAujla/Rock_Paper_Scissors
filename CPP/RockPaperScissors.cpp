@@ -1,6 +1,7 @@
 #include<iostream>
 #include<cstdlib>
 #include<ctime>
+#include<algorithm>
 using namespace std;
 
 class RockPaperScissors {
@@ -40,6 +41,14 @@ class RockPaperScissors {
                 computerChoice = OPTION_LIST[randomNumber(0, 3)];
 
                 // Ask user for a choice and check if valid or not.
+                getValidUserChoice();
+                cout << "I picked " << computerChoice << "." << endl;
+
+                // Compares the choices made and works out the winner.
+                determineWinner();
+                // Ask the user if they want to play again.
+                cout << "Would you like to play again? \n(yes/no)" << endl;
+                cin >> playAgain;
             }
         }
 
@@ -73,13 +82,52 @@ class RockPaperScissors {
 
             Variables:
                 validChoice = Stores whether the user made a valid 
-                            choice.
+                              choice.
             */
             bool validChoice = false;
             while (validChoice == false) {
                 cout << "What is your choice? \n(rock/paper/scissors)" << endl;
                 cin >> userChoice;
-                if (OPTION_LIST.)
+                if (std::find(std::begin(OPTION_LIST), std::end(OPTION_LIST), userChoice) != std::end(OPTION_LIST)) {
+                    validChoice = true;
+                } else {
+                    cout << "Invalid choice, try again." << endl;
+                }
+            }
+        }
+
+
+
+        void determineWinner() {
+            /*
+            Uses if statements to determine who won the game.
+            Compares the choices and uses the rules of rock paper scissors 
+            to determine the winner.
+            */
+            if (userChoice == "rock") {
+                if (computerChoice == "rock") {
+                    cout << "It's a draw." << endl;
+                } else if (computerChoice == "paper") {
+                    cout << "I win!" << endl;
+                } else if (computerChoice == "scissors") {
+                    cout << "There's always next time..." << endl;
+                }
+            } else if (userChoice == "paper") {
+                if (computerChoice == "paper") {
+                    cout << "It's a draw." << endl;
+                } else if (computerChoice == "scissors") {
+                    cout << "I win!" << endl;
+                } else if (computerChoice == "rock") {
+                    cout << "There's always next time..." << endl;
+                }
+            } else if (userChoice == "scissors") {
+                if (computerChoice == "scissors") {
+                    cout << "It's a draw." << endl;
+                } else if (computerChoice == "rock") {
+                    cout << "I win!" << endl;
+                } else if (computerChoice == "paper") {
+                    cout << "There's always next time..." << endl;
+                }
             }
         }
 };
@@ -87,5 +135,7 @@ class RockPaperScissors {
 
 
 int main() {
-
+    RockPaperScissors rps;
+    rps.run();
+    return 0;
 }
